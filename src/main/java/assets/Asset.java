@@ -21,7 +21,6 @@ public class Asset {
 	
 	private String name;
 	
-	@JsonIgnore
 	private String URI;
 	
 	@OneToMany(mappedBy = "asset")
@@ -30,7 +29,7 @@ public class Asset {
 	/**
 	 * Constructor
 	 */
-	private Asset() { } // JPA Only
+	Asset() { } // Package Only
 	
 	/**
 	 * Constructor
@@ -65,6 +64,10 @@ public class Asset {
 	 */
 	public String getURI() {
 		return URI;
+	}
+	
+	public void setURI(String uri) {
+		this.URI = uri;
 	}
 	
 	/**

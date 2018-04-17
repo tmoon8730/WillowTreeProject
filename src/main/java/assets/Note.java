@@ -53,6 +53,10 @@ public class Note {
 		return asset;
 	}
 	
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
+	
 	/**
 	 * Getter for noteText
 	 * @return

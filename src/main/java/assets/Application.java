@@ -18,7 +18,7 @@ public class Application {
 	CommandLineRunner init(AssetRepository assetRepository,
 			NoteRepository noteRepository) {
 		return (evt) -> Arrays.asList(
-				"jhoeller,dsyer,pwebb,ogierke,rwinch,mfisher,mpollack,jlong".split(","))
+				"jhoeller,test123".split(","))
 				.forEach(
 						a -> {
 							Asset asset = assetRepository.save(new Asset(a,
