@@ -34,11 +34,11 @@ public class NoteRestController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	ResponseEntity<?> add(@PathVariable String userId, @RequestBody Note input) {
-		this.validateAsset(userId);
+	ResponseEntity<?> add(@PathVariable String assetId, @RequestBody Note input) {
+		this.validateAsset(assetId);
 
 		return this.assetRepository
-				.findByName(userId)
+				.findByName(assetId)
 				.map(asset -> {
 					Note result = noteRepository.save(new Note(asset,
 							input.getNoteText()));

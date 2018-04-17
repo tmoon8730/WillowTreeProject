@@ -59,13 +59,16 @@ public class AssetRestController {
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/{assetId}")
 	ResponseEntity<?> delete(@PathVariable String assetId) {
+		this.validateAsset(assetId);
 		try {
-			Asset result = this.assetRepository.deleteByName(assetId);
-			URI location = ServletUriComponentsBuilder
-					.fromCurrentRequest().path("/{id}")
-					.buildAndExpand(result.getId()).toUri();
-			
-			return ResponseEntity.created(location).build();
+			Optional<Asset> deleteAsset = this.assetRepository.findByName(assetId);
+			if(deleteAsset.isPresent()) {
+				deleteAsset.get().getNotes().forEach(note -> {
+					this.noteRepository.delete(note);
+				});
+				this.assetRepository.delete(deleteAsset.get());
+			}
+			return ResponseEntity.noContent().build();
 		} catch (Exception e) {
 			System.out.println(e);
 			return ResponseEntity.noContent().build();
